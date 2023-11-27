@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useAlertContext } from "../context/alertContext";
+import { useAlertContext } from "../Context/alertContext";
 
 function Alert() {
     const { isOpen, type, message, onClose } = useAlertContext();
