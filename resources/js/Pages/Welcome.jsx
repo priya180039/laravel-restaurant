@@ -8,18 +8,18 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             <Head title="Welcome" />
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="absolute -top-10 sm:top-0 right-2 sm:right-0 sm:p-[1.875rem] text-end z-50">
+                <div className="absolute -top-10 sm:top-0 right-2 sm:right-2 sm:p-[1.875rem] text-end z-50">
                     {auth.user ? (
                         <div>
                             <Link
                                 href={route("foods")}
-                                className="font-semibold mx-1 text-gray-800 bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white dark:bg-zinc-900/70 dark:bg-gradient-to-bl from-gray-700/50 dark:hover:bg-zinc-800/80 p-2 px-3 rounded-lg focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                className="font-semibold mx-1 text-gray-800 bg-gray-200/80 hover:text-black hover:bg-gray-50 dark:text-gray-300 dark:hover:text-white dark:bg-zinc-900/70 dark:bg-gradient-to-bl from-gray-700/50 dark:hover:bg-zinc-800/80 p-2 px-3 rounded-lg focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 Foods
                             </Link>
                             <Link
                                 href={route("beverages")}
-                                className="font-semibold mx-1 text-gray-800 bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white dark:bg-zinc-900/70 dark:bg-gradient-to-bl from-gray-700/50 dark:hover:bg-zinc-800/80 p-2 px-3 rounded-lg focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                className="font-semibold mx-1 text-gray-800 bg-gray-200/80 hover:text-black hover:bg-gray-50 dark:text-gray-300 dark:hover:text-white dark:bg-zinc-900/70 dark:bg-gradient-to-bl from-gray-700/50 dark:hover:bg-zinc-800/80 p-2 px-3 rounded-lg focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 Beverages
                             </Link>
@@ -28,14 +28,14 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         <>
                             <Link
                                 href={route("login")}
-                                className="font-semibold mx-1 text-gray-800 bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white dark:bg-zinc-900/70 dark:bg-gradient-to-bl from-zinc-800/90 dark:hover:bg-zinc-800/80 p-2 px-3 rounded-lg focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                className="font-semibold mx-1 text-gray-800 bg-gray-200/80 hover:text-black hover:bg-gray-50 dark:text-gray-300 dark:hover:text-white dark:bg-zinc-900/70 dark:bg-gradient-to-bl from-zinc-800/90 dark:hover:bg-zinc-800/80 p-2 px-3 rounded-lg focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 Log in
                             </Link>
 
                             <Link
                                 href={route("register")}
-                                className="font-semibold mx-1 text-gray-800 bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white dark:bg-zinc-900/70 dark:bg-gradient-to-bl from-zinc-800/90 dark:hover:bg-zinc-800/80 p-2 px-3 rounded-lg focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                className="font-semibold mx-1 text-gray-700 bg-gray-200/80 hover:text-black hover:bg-gray-50 dark:text-gray-300 dark:hover:text-white dark:bg-zinc-900/70 dark:bg-gradient-to-bl from-zinc-800/90 dark:hover:bg-zinc-800/80 p-2 px-3 rounded-lg focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 Register
                             </Link>
@@ -49,17 +49,20 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </div>
                     <div className="mt-16">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                            <div className="scale-100 col-span-2 p-6 bg-white dark:bg-zinc-900/80 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+                            <div className="scale-100 col-span-2 p-6 bg-white/50 dark:bg-zinc-900/80 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                                 <div>
-                                    <div className="w-3/12 mx-auto flex items-center justify-center">
+                                    <div className="hidden dark:flex w-9/12 sm:w-3/12 mx-auto items-center justify-center">
                                         <img src="../Images/logo-white-tp.png" />
                                     </div>
+                                    <div className="flex dark:hidden w-9/12 sm:w-3/12 mx-auto items-center justify-center">
+                                        <img src="../Images/logo-black-tp.png" />
+                                    </div>
 
-                                    <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900 dark:text-white">
+                                    <h2 className="mt-6 text-center text-3xl font-semibold text-zinc-950/80 dark:text-white">
                                         Welcome to Larareact Restaurant
                                     </h2>
 
-                                    <p className="mt-4 text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                                    <p className="mt-4 text-black/90 dark:text-gray-300 text-base leading-relaxed">
                                         Welcome to our dynamic e-commerce
                                         platform dedicated to providing an
                                         extensive array of delightful foods and
@@ -83,25 +86,25 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </div>
                             </div>
 
-                            <div className="scale-100 col-span-2 p-6 bg-white dark:bg-zinc-900/80 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+                            <div className="scale-100 col-span-2 p-6 bg-white/50 dark:bg-zinc-900/80 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                                 <div>
-                                    <h2 className="text-center text-3xl font-semibold text-gray-900 dark:text-white">
+                                    <h2 className="text-center text-3xl font-semibold text-zinc-950/80 dark:text-white">
                                         Best Selling
                                     </h2>
 
-                                    <div className="mt-4 text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                                    <div className="mt-4 text-black/90 dark:text-gray-300 text-base leading-relaxed">
                                         <BestSelling />
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="scale-100 col-span-2 p-6 bg-white dark:bg-zinc-900/80 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+                            <div className="scale-100 col-span-2 p-6 bg-white/50 dark:bg-zinc-900/80 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                                 <div className="w-full mx-auto">
-                                    <h2 className="text-center text-3xl font-semibold text-gray-900 dark:text-white">
+                                    <h2 className="text-center text-3xl font-semibold text-zinc-950/80 dark:text-white">
                                         Business Contact
                                     </h2>
 
-                                    <div className="mt-4 w-8/12 mx-auto text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                                    <div className="mt-4 w-9/12 mx-auto text-black/90 dark:text-gray-300 text-base leading-relaxed">
                                         <SocialMedias />
                                     </div>
                                 </div>

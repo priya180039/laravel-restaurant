@@ -6,6 +6,7 @@ import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 import { BiCart } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import LightLogo from "@/Components/LightLogo";
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -16,14 +17,15 @@ export default function Authenticated({ user, header, children }) {
         cart.beverageCart.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-zinc-950 bg-gradient-to-br from-gray-700/30">
-            <nav className="bg-white dark:bg-zinc-900 bg-gradient-to-br from-gray-80/60 border-b border-gray-100 dark:border-gray-700">
+        <div className="min-h-screen bg-gray-200 dark:bg-zinc-950 bg-gradient-to-br dark:from-gray-700/30">
+            <nav className="bg-blue-300 dark:bg-zinc-900 bg-gradient-to-br dark:from-gray-80/60 border-b border-gray-100 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="shrink-0 flex items-center w-[7%]">
+                            <div className="shrink-0 flex items-center w-[10%] sm:w-[11.5%] md:w-[7%]">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                    <ApplicationLogo className="hidden dark:block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                                    <LightLogo className="block dark:hidden h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </Link>
                             </div>
 
@@ -108,7 +110,7 @@ export default function Authenticated({ user, header, children }) {
                                         (previousState) => !previousState
                                     )
                                 }
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-sky-700/90 focus:outline-none focus:bg-gray-100 dark:focus:bg-sky-700/90 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-zinc-700 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-sky-700/90 focus:outline-none focus:bg-gray-100 dark:focus:bg-sky-700/90 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -209,7 +211,7 @@ export default function Authenticated({ user, header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white dark:bg-sky-700/90 bg-gradient-to-br from-gray-80/60 shadow">
+                <header className="bg-sky-500/70 dark:bg-sky-700/90 bg-gradient-to-br from-gray-80/60 shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {header}
                     </div>

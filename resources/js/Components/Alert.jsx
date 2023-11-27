@@ -37,11 +37,9 @@ function Alert() {
                 <div
                     onClick={onClose}
                     ref={cancelRef}
-                    className="rounded-5xl"
+                    className="rounded-5xl top-[15%] left-1/2 w-11/12 sm:w-fit"
                     style={{
                         position: "fixed",
-                        top: "10%",
-                        left: "50%",
                         transform: "translate(-50%, -50%)",
                     }}
                 >

@@ -37,7 +37,7 @@ export default function Foods({ auth }) {
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                <h2 className="font-semibold text-xl text-gray-200 leading-tight">
                     Foods
                 </h2>
             }
@@ -46,7 +46,7 @@ export default function Foods({ auth }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-transparent overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="bg-transparent overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="text-gray-900 dark:text-gray-100">
                             {isLoading && <Loader />}
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
@@ -55,7 +55,7 @@ export default function Foods({ auth }) {
                                         return (
                                             <div
                                                 key={food.id}
-                                                className="w-full flex flex-col justify-between text-sky-600/90 bg-white dark:bg-zinc-950/90 border-2 dark:border-zinc-700/90 my-3 mx-auto max-w-md rounded-lg overflow-hidden shadow-lg"
+                                                className="w-full flex flex-col justify-between dark:text-sky-600/90 bg-white dark:bg-zinc-950/90 border-2 border-blue-400/80 dark:border-zinc-700/90 my-3 mx-auto max-w-md rounded-lg overflow-hidden shadow-lg"
                                             >
                                                 <img
                                                     className="foodImg"
@@ -63,7 +63,7 @@ export default function Foods({ auth }) {
                                                     alt="food"
                                                 />
                                                 <div className="flex flex-col flex-1 justify-start">
-                                                    <h1 className="text-center text-sky-400/90 mt-2 font-bold text-xl">
+                                                    <h1 className="text-center dark:text-sky-400/90 mt-2 font-bold text-xl">
                                                         {food.product_name}
                                                     </h1>
                                                     <p className="text-center px-3">

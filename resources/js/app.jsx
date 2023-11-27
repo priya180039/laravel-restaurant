@@ -7,7 +7,7 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { Provider } from "react-redux";
 import { AlertProvider } from "./Context/alertContext";
 
-const appName = import.meta.env.VITE_APP_NAME || "Larareact";
+const appName = "Larareact";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
