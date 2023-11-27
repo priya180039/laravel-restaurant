@@ -24,7 +24,7 @@ const Jumbotron = () => {
     }, []);
 
     return (
-        <div className="fixed flex justify-center items-center h-[100vh] w-screen overflow-hidden brightness-75 z-0">
+        <div className="fixed top-0 flex justify-center items-center h-[100vh] w-screen overflow-hidden brightness-75 z-0">
             {images.map((image, i) => {
                 return (
                     // <img
@@ -36,7 +36,7 @@ const Jumbotron = () => {
                         key={i}
                         src={`../Images/${image}`}
                         alt={`Slide ${i + 1}`}
-                        className="absolute h-[100vh] w-screen z-50 object-cover"
+                        className="absolute h-[100vh] w-screen z-10 object-cover"
                         style={{
                             opacity: i === activeIndex ? 1 : 0,
                             zIndex: i === activeIndex ? 1 : 0,

@@ -1,13 +1,15 @@
 import { getAllFood } from "@/Api/Api";
+import Loader from "@/Components/Loader";
 import SecondaryButton from "@/Components/SecondaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { addToCart } from "@/Store/store";
 import { Head } from "@inertiajs/react";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export default function Foods({ auth }) {
     const [allFood, setAllFood] = useState([]);
+    const [isLoading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
     const handleAddToCart = (category, id, product_name, price) => {
@@ -22,11 +24,13 @@ export default function Foods({ auth }) {
     };
 
     useEffect(() => {
+        setLoading(true);
         getAllFood().then((res) => {
             if (res) {
                 setAllFood(res.data.data);
                 console.log(res.data);
             }
+            setLoading(false);
         });
     }, []);
     return (
@@ -44,6 +48,7 @@ export default function Foods({ auth }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-transparent overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="text-gray-900 dark:text-gray-100">
+                            {isLoading && <Loader />}
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
                                 {allFood &&
                                     allFood.map((food) => {

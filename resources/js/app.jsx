@@ -5,8 +5,9 @@ import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { Provider } from "react-redux";
+import { AlertProvider } from "./Context/alertContext";
 
-const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+const appName = import.meta.env.VITE_APP_NAME || "Larareact";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -20,7 +21,9 @@ createInertiaApp({
 
         root.render(
             <Provider store={store}>
-                <App {...props} />
+                <AlertProvider>
+                    <App {...props} />
+                </AlertProvider>
             </Provider>
         );
     },

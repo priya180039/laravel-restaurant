@@ -50,13 +50,14 @@ const cartSlice = createSlice({
                 existingItem.quantity -= 1;
             }
         },
-        // removeFromCart: (state) => {
-        //     state.foodCart -= 1;
-        // },
+        reset: (state) => {
+            state.foodCart = [];
+            state.beverageCart = [];
+        },
     },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, reset } = cartSlice.actions;
 
 const cartReducer = {
     cart: cartSlice.reducer,

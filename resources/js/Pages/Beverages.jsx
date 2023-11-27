@@ -1,4 +1,5 @@
 import { getAllBeverages } from "@/Api/Api";
+import Loader from "@/Components/Loader";
 import SecondaryButton from "@/Components/SecondaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { addToCart } from "@/Store/store";
@@ -8,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 export default function Beverages({ auth }) {
     const [allBeverages, setAllBeverages] = useState([]);
+    const [isLoading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
     const handleAddToCart = (category, id, beverage_name, price) => {
@@ -22,11 +24,13 @@ export default function Beverages({ auth }) {
     };
 
     useEffect(() => {
+        setLoading(true);
         getAllBeverages().then((res) => {
             if (res) {
                 setAllBeverages(res.data.data);
                 console.log(res.data);
             }
+            setLoading(false);
         });
     }, []);
     return (
@@ -44,6 +48,7 @@ export default function Beverages({ auth }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-transparent overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="text-gray-900 dark:text-gray-100">
+                            {isLoading && <Loader />}
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
                                 {allBeverages &&
                                     allBeverages.map((beverage) => {

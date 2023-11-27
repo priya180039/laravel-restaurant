@@ -108,7 +108,7 @@ export default function Authenticated({ user, header, children }) {
                                         (previousState) => !previousState
                                     )
                                 }
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-sky-700/90 focus:outline-none focus:bg-gray-100 dark:focus:bg-sky-700/90 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -140,6 +140,11 @@ export default function Authenticated({ user, header, children }) {
                                     />
                                 </svg>
                             </button>
+                            {count !== 0 && !showingNavigationDropdown && (
+                                <div className="absolute w-fit top-3 right-2 text-sm p-0 px-1 rounded-xl bg-red-600 text-gray-200">
+                                    {count}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -164,7 +169,19 @@ export default function Authenticated({ user, header, children }) {
                             Beverages
                         </ResponsiveNavLink>
                     </div>
-
+                    <div className="py-2 border-t border-gray-200 dark:border-gray-600">
+                        <ResponsiveNavLink
+                            href={route("cart")}
+                            active={route().current("cart")}
+                        >
+                            <p>Cart</p>
+                            {count !== 0 && (
+                                <p className="w-fit text-sm p-0 ml-2 mt-0.5 px-1 rounded-xl bg-red-600 text-gray-200">
+                                    {count}
+                                </p>
+                            )}
+                        </ResponsiveNavLink>
+                    </div>
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800 dark:text-gray-200">
