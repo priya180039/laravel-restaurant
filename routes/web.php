@@ -29,6 +29,10 @@ Route::get('/foods', function () {
     return Inertia::render('Foods');
 })->middleware(['auth', 'verified'])->name('foods');
 
+Route::get('/beverages', function () {
+    return Inertia::render('Beverages');
+})->middleware(['auth', 'verified'])->name('beverages');
+
 Route::get('/cart', function () {
     return Inertia::render('Cart');
 })->middleware(['auth', 'verified'])->name('cart');

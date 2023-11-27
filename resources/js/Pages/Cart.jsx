@@ -1,4 +1,4 @@
-import { getAllFood } from "@/Api/Api";
+import { getAllBeverages, getAllFood } from "@/Api/Api";
 import SecondaryButton from "@/Components/SecondaryButton";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { addToCart, removeFromCart } from "@/Store/store";
@@ -9,16 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart({ auth }) {
     const [allFood, setAllFood] = useState([]);
+    const [allBeverages, setAllBeverages] = useState([]);
     const [total, setTotal] = useState(0);
     const cart = useSelector((state) => state.cart);
     const dispatch = useDispatch();
 
-    const handleAddToCart = (category, id, product_name, price) => {
+    const handleAddToCart = (category, id, name, price) => {
         dispatch(
             addToCart({
                 category: category,
                 id: id,
-                product_name: product_name,
+                name: name,
                 price: price,
             })
         );
@@ -31,7 +32,11 @@ export default function Cart({ auth }) {
         getAllFood().then((res) => {
             if (res) {
                 setAllFood(res.data.data);
-                console.log(res.data);
+            }
+        });
+        getAllBeverages().then((res) => {
+            if (res) {
+                setAllBeverages(res.data.data);
             }
         });
         console.log(cart);
@@ -45,8 +50,19 @@ export default function Cart({ auth }) {
             }
         })
         .filter(Boolean);
-    const filteredDrinks = [];
     console.log(filteredFoods);
+
+    const filteredBeverages = allBeverages
+        .map((beverage) => {
+            const exist = cart.beverageCart.find(
+                (item) => item.id === beverage.id
+            );
+            if (exist) {
+                return { ...beverage, quantity: exist.quantity };
+            }
+        })
+        .filter(Boolean);
+    console.log(filteredBeverages);
 
     useEffect(() => {
         let count = 0;
@@ -57,15 +73,15 @@ export default function Cart({ auth }) {
                 count += Math.floor(food.quantity * food.price);
             });
         }
-        if (!filteredDrinks) {
+        if (!filteredBeverages) {
             count += 0;
         } else {
-            filteredDrinks.forEach((drink) => {
+            filteredBeverages.forEach((drink) => {
                 count += Math.floor(drink.quantity * drink.price);
             });
         }
         setTotal(count);
-    }, [filteredFoods, filteredDrinks]);
+    }, [filteredFoods, filteredBeverages]);
 
     return (
         <AuthenticatedLayout
@@ -80,15 +96,15 @@ export default function Cart({ auth }) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="flex justify-between p-6 text-gray-900 dark:text-gray-100">
-                            <div className="w-6/12 grid grid-cols-1 gap-2">
+                    <div className="bg-white dark:bg-transparent overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="flex justify-between text-gray-900 dark:text-gray-100">
+                            <div className="w-6/12 grid grid-cols-1 gap-0">
                                 {filteredFoods &&
                                     filteredFoods.map((food) => {
                                         return (
                                             <div
                                                 key={food.id}
-                                                className="w-11/12 grid grid-cols-6 justify-between text-gray-900 bg-white my-3 mx-3 rounded-lg overflow-hidden shadow-lg"
+                                                className="w-full grid grid-cols-6 justify-between text-sky-600/90 bg-white dark:bg-zinc-950/90 border-2 dark:border-zinc-700/90 my-3 mx-auto rounded-lg overflow-hidden shadow-lg"
                                             >
                                                 <div className="w-full overflow-hidden col-span-2">
                                                     <img
@@ -99,7 +115,7 @@ export default function Cart({ auth }) {
                                                 </div>
                                                 <div className="flex flex-col justify-center col-span-4">
                                                     <div className="flex flex-col justify-center">
-                                                        <h1 className="text-center text-indigo-950/90 font-bold text-2xl">
+                                                        <h1 className="text-center text-sky-400/90 font-bold text-2xl">
                                                             {food.product_name}
                                                         </h1>
                                                         <p className="text-center text-lg px-3">
@@ -114,7 +130,7 @@ export default function Cart({ auth }) {
                                                                     food.id
                                                                 )
                                                             }
-                                                            className="shadow-3xl border-[1px] border-zinc-950/90 transform transition-all duration-200 ease-in-out hover:scale-110 hover:cursor-pointer"
+                                                            className="shadow-3xl border-[1px] border-zinc-950/90 transform transition-all duration-200 ease-in-out hover:scale-150 hover:cursor-pointer"
                                                         />
                                                         <p className="px-3">
                                                             {food.quantity}
@@ -128,18 +144,81 @@ export default function Cart({ auth }) {
                                                                     food.price
                                                                 )
                                                             }
-                                                            className="shadow-3xl border-[1px] border-zinc-950/90 transform transition-all duration-200 ease-in-out hover:scale-110 hover:cursor-pointer"
+                                                            className="shadow-3xl border-[1px] border-zinc-950/90 transform transition-all duration-200 ease-in-out hover:scale-150 hover:cursor-pointer"
                                                         />
                                                     </div>
                                                 </div>
                                             </div>
                                         );
                                     })}
+                                {filteredBeverages &&
+                                    filteredBeverages.map((beverage) => {
+                                        return (
+                                            <div
+                                                key={beverage.id}
+                                                className="w-full grid grid-cols-6 justify-between text-sky-600/90 bg-white dark:bg-zinc-950/90 border-2 dark:border-zinc-700/90 my-3 rounded-lg overflow-hidden shadow-lg"
+                                            >
+                                                <div className="w-full overflow-hidden col-span-2">
+                                                    <img
+                                                        className="object-cover"
+                                                        src={`../Images/${beverage.image}`}
+                                                        alt="beverage"
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col justify-center col-span-4">
+                                                    <div className="flex flex-col justify-center">
+                                                        <h1 className="text-center text-sky-400/90 font-bold text-2xl">
+                                                            {
+                                                                beverage.beverage_name
+                                                            }
+                                                        </h1>
+                                                        <p className="text-center text-lg px-3">
+                                                            {beverage.price}
+                                                        </p>
+                                                    </div>
+                                                    <div className="flex items-center justify-center text-lg pt-4">
+                                                        <BiMinus
+                                                            onClick={() =>
+                                                                handleRemoveFromCart(
+                                                                    "beverageCart",
+                                                                    beverage.id
+                                                                )
+                                                            }
+                                                            className="shadow-3xl border-[1px] border-zinc-950/90 transform transition-all duration-200 ease-in-out hover:scale-150 hover:cursor-pointer"
+                                                        />
+                                                        <p className="px-3">
+                                                            {beverage.quantity}
+                                                        </p>
+                                                        <BiPlus
+                                                            onClick={() =>
+                                                                handleAddToCart(
+                                                                    "beverageCart",
+                                                                    beverage.id,
+                                                                    beverage.beverage_name,
+                                                                    beverage.price
+                                                                )
+                                                            }
+                                                            className="shadow-3xl border-[1px] border-zinc-950/90 transform transition-all duration-200 ease-in-out hover:scale-150 hover:cursor-pointer"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                {filteredFoods.length < 1 &&
+                                    filteredBeverages.length < 1 && (
+                                        <div className="w-full text-sky-400/90 bg-white dark:bg-zinc-950/90 border-2 dark:border-zinc-700/90 my-3 p-2 rounded-lg overflow-hidden shadow-lg">
+                                            <p className="text-2xl">
+                                                You haven't add anything to cart
+                                                yet.
+                                            </p>
+                                        </div>
+                                    )}
                             </div>
                             <div className="w-6/12 text-gray-900">
-                                <div className="grid grid-cols-2 gap-2 text-center my-3 mx-3 col-span-2">
-                                    <div className="w-full p-2 text-lg bg-white rounded-lg">
-                                        <h1 className="text-xl font-bold">
+                                <div className="grid grid-cols-2 gap-3 text-center my-3 mx-3 col-span-2">
+                                    <div className="w-full p-2 text-lg text-sky-600/90 bg-white dark:bg-zinc-950/90 border-2 dark:border-zinc-700/90 rounded-lg">
+                                        <h1 className="text-xl font-bold text-sky-400/90">
                                             Food Costs
                                         </h1>
                                         {cart.foodCart.map((food) => {
@@ -151,7 +230,7 @@ export default function Cart({ auth }) {
                                                     <p className="underline">
                                                         {food.product_name}
                                                     </p>
-                                                    <p className="text-gray-600/90">
+                                                    <p>
                                                         {food.price +
                                                             " x " +
                                                             food.quantity +
@@ -165,11 +244,36 @@ export default function Cart({ auth }) {
                                             );
                                         })}
                                     </div>
-                                    <div className="w-full bg-white rounded-lg">
-                                        Beverage Costs
+                                    <div className="w-full p-2 text-lg text-sky-600/90 bg-white dark:bg-zinc-950/90 border-2 dark:border-zinc-700/90 rounded-lg">
+                                        <h1 className="text-xl font-bold text-sky-400/90">
+                                            Beverage Costs
+                                        </h1>
+                                        {console.log(cart.beverageCart)}
+                                        {cart.beverageCart.map((beverage) => {
+                                            return (
+                                                <div
+                                                    key={beverage.id}
+                                                    className="text-left"
+                                                >
+                                                    <p className="underline">
+                                                        {beverage.beverage_name}
+                                                    </p>
+                                                    <p>
+                                                        {beverage.price +
+                                                            " x " +
+                                                            beverage.quantity +
+                                                            " = " +
+                                                            Math.floor(
+                                                                beverage.price *
+                                                                    beverage.quantity
+                                                            )}
+                                                    </p>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
-                                <div className="w-[calc(100%-1.5rem)] flex justify-between gap-2 my-3 mx-3 text-2xl text-gray-200 rounded-lg">
+                                <div className="w-[calc(100%-1.5rem)] flex justify-between gap-2 my-3 mx-3 text-2xl text-sky-400/90 rounded-lg">
                                     <p>Total Price :</p>
                                     <p>{total}</p>
                                 </div>

@@ -4,21 +4,39 @@ const cartSlice = createSlice({
     name: "cart",
     initialState: {
         foodCart: [],
-        drinkCart: [],
+        beverageCart: [],
     },
     reducers: {
         addToCart: (state, action) => {
-            const { category, id, price, product_name } = action.payload;
-            const existingItem = state[category].find((item) => item.id === id);
-            if (existingItem) {
-                existingItem.quantity += 1;
+            const { category, id, price, name } = action.payload;
+            if (category === "foodCart") {
+                const existingItem = state[category].find(
+                    (item) => item.id === id
+                );
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    state[category].push({
+                        id,
+                        quantity: 1,
+                        price: price,
+                        product_name: name,
+                    });
+                }
             } else {
-                state[category].push({
-                    id,
-                    quantity: 1,
-                    price: price,
-                    product_name: product_name,
-                });
+                const existingItem = state[category].find(
+                    (item) => item.id === id
+                );
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    state[category].push({
+                        id,
+                        quantity: 1,
+                        price: price,
+                        beverage_name: name,
+                    });
+                }
             }
         },
         removeFromCart: (state, action) => {

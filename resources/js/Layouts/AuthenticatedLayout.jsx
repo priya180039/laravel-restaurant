@@ -13,15 +13,15 @@ export default function Authenticated({ user, header, children }) {
     const cart = useSelector((state) => state.cart);
     const count =
         cart.foodCart.reduce((acc, item) => acc + item.quantity, 0) +
-        cart.drinkCart.reduce((acc, item) => acc + item.quantity, 0);
+        cart.beverageCart.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+        <div className="min-h-screen bg-gray-100 dark:bg-zinc-950 bg-gradient-to-br from-gray-700/30">
+            <nav className="bg-white dark:bg-zinc-900 bg-gradient-to-br from-gray-80/60 border-b border-gray-100 dark:border-gray-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="shrink-0 flex items-center">
+                            <div className="shrink-0 flex items-center w-[7%]">
                                 <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </Link>
@@ -34,6 +34,12 @@ export default function Authenticated({ user, header, children }) {
                                 >
                                     Foods
                                 </NavLink>
+                                <NavLink
+                                    href={route("beverages")}
+                                    active={route().current("beverages")}
+                                >
+                                    Beverages
+                                </NavLink>
                             </div>
                         </div>
 
@@ -42,10 +48,11 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink
                                     href={route("cart")}
                                     active={route().current("cart")}
+                                    className="h-16"
                                 >
-                                    <BiCart className="text-xl" />
+                                    <BiCart className="text-3xl" />
                                     {count !== 0 && (
-                                        <div className="absolute top-0 left-6 text-sm p-0.5 px-1 rounded-xl bg-red-600 text-gray-200">
+                                        <div className="absolute w-fit bottom-5 left-5 text-sm p-0 px-1 rounded-xl bg-red-600 text-gray-200">
                                             {count}
                                         </div>
                                     )}
@@ -57,7 +64,7 @@ export default function Authenticated({ user, header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+                                                className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 dark:text-sky-500/90 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
                                                 <svg
@@ -150,6 +157,12 @@ export default function Authenticated({ user, header, children }) {
                         >
                             Foods
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("beverages")}
+                            active={route().current("beverages")}
+                        >
+                            Beverages
+                        </ResponsiveNavLink>
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -179,7 +192,7 @@ export default function Authenticated({ user, header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white dark:bg-gray-800 shadow">
+                <header className="bg-white dark:bg-sky-700/90 bg-gradient-to-br from-gray-80/60 shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {header}
                     </div>
